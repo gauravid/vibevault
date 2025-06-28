@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🚀 Sign Up - Join the Vibe</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #a29bfe, #74b9ff);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #2d3436;
+    }
+
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 28px;
+      color: white;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 60px auto;
+      padding: 40px 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(18px);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+    }
+
+    .form-container h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .form-container p {
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #ecf0f1;
+    }
+
+    .form-container input[type="email"],
+    .form-container input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      backdrop-filter: blur(8px);
+      font-size: 14px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .form-container input::placeholder {
+      color: #dfe6e9;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      background-color: #55efc4;
+      color: #2d3436;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+      box-shadow: 0 6px 12px rgba(85, 239, 196, 0.3);
+    }
+
+    .form-container button:hover {
+      background-color: #00cec9;
+      transform: scale(1.03);
+    }
+
+    .redirect-link {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .redirect-link a {
+      color: #81ecec;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .redirect-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="genz-theme">
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <h1>🌀 VibeVault</h1>
+    <div>
+      <a href="/login" class="btn">👤 Login</a>
+    </div>
+  </div>
+
+  <!-- SIGNUP FORM -->
+  <div class="form-container">
+    <h2>✨ Let's Get You Started</h2>
+    <p>Join the squad and flex your finances 💸</p>
+
+    <form method="POST">
+      <input type="email" name="email" placeholder="📧 Your email" required>
+      <input type="password" name="password" placeholder="🔐 Create a secure password" required>
+      <button type="submit">Create Vibe 🌀</button>
+    </form>
+
+    <p class="redirect-link">Already vibing here? <a href="/login">Login instead</a></p>
+  </div>
+
+</body>
+</html>
+   
