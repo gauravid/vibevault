@@ -16,6 +16,12 @@
 - HTML5, CSS3, JavaScript (Chart.js)
 - pandas, python-dotenv
 
+## 📸 Screenshots
+
+| 📊 Dashboard | 💰 Add Transaction | 🔐 Login / Signup |
+|--------------|--------------------|-------------------|
+| ![Dashboard](screenshots/dashboard.png) | ![Add Transaction](screenshots/add_transaction.png) | ![Login](screenshots/login.png) |
+
 
 ## 📦 Setup Instructions
 
