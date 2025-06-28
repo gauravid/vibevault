@@ -20,7 +20,7 @@
 
 | 📊 Dashboard | 💰 Add Transaction | 🔐 Login / Signup |
 |--------------|--------------------|-------------------|
-| ![Dashboard](screenshots/dashboard.png) | ![Add Transaction](screenshots/add_transaction.png) | ![Login](screenshots/login.png) |
+| ![Dashboard](screenshots/app.png) | ![Add Transaction](screenshots/transaction.png) | ![Login](screenshots/login.png) |
 
 
 ## 📦 Setup Instructions
@@ -29,7 +29,6 @@
 git clone https://github.com/yourusername/VibeVault.git
 cd VibeVault
 pip install -r requirements.txt
-cp .env.example .env   # Add your DB credentials
 python app.py
 
 
