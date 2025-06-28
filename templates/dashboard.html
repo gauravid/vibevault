@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>💸 Your Vibe Finance</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('/static/bg.png');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: rgba(84, 160, 255, 0.3);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .btn {
+      background: rgba(29, 209, 161, 0.4);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn:hover {
+      background: rgba(16, 172, 132, 0.6);
+      transform: scale(1.05);
+    }
+
+    .dashboard-content {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 24px;
+      transition: transform 0.3s ease-in-out;
+      color: #fff;
+    }
+
+    .card:hover {
+      transform: scale(1.01);
+    }
+
+    .transaction-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .transaction-list li {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+    }
+
+    .summary-filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+
+    .summary-filters button {
+      background-color: rgba(72, 219, 251, 0.4);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .summary-filters .active-filter {
+      background-color: rgba(255, 107, 129, 0.6);
+    }
+
+    .tips-box ul {
+      list-style: disc;
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .tips-box li {
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #ffeaa7;
+    }
+  </style>
+</head>
+<body class="genz-theme">
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <h1>💸 Your Finance Vibe</h1>
+    <div>
+      <a href="/add" class="btn">➕ Add</a>
+      <a href="/logout" class="btn">🚪 Logout</a>
+    </div>
+  </div>
+
+  <!-- Dashboard Filters -->
+  <div class="dashboard-content">
+    <div class="summary-filters">
+      <form method="get" action="/dashboard">
+        <button name="filter" value="7" {% if request.args.get('filter') == '7' %}class="active-filter"{% endif %}>⚡️ 7 Days</button>
+        <button name="filter" value="15" {% if request.args.get('filter') == '15' %}class="active-filter"{% endif %}>🌈 15 Days</button>
+        <button name="filter" value="30" {% if request.args.get('filter') == '30' or not request.args.get('filter') %}class="active-filter"{% endif %}>🗓️ All Time</button>
+      </form>
+    </div>
+
+    <!-- Recap Summary -->
+    <div class="summary-box card">
+      <h2>📋 Recap Zone</h2>
+      <p><strong>🎯 Total Transactions:</strong> {{ transactions | length }}</p>
+      <p><strong>💸 Spent:</strong> ₹{{ transactions | sum(attribute='amount') }}</p>
+    </div>
+
+    <!-- Spend Chart -->
+    <div class="chart-box card">
+      <h2>📊 Spend Breakdown</h2>
+      <canvas id="pieChart" width="180" height="180"></canvas>
+    </div>
+
+    <!-- Smart Tips -->
+    {% if tips %}
+    <div class="tips-box card">
+      <h2>🧠 Smart Spending Tips</h2>
+      <ul>
+        {% for tip in tips %}
+          <li>{{ tip }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <!-- Latest Transactions -->
+    <div class="transactions-box card">
+      <h2>🧾 Latest Moves</h2>
+      <ul class="transaction-list">
+        {% for txn in transactions[-5:] %}
+          <li>
+            <div class="txn-row">
+              <div>
+                <span>{{ txn.date }} - <strong>{{ txn.category }}</strong></span><br>
+                <small>{{ txn.description }}</small>
+              </div>
+              <div>
+                ₹{{ txn.amount }}<br>
+                <a href="/edit/{{ txn.id }}">✏️</a> | <a href="/delete/{{ txn.id }}">🗑️</a>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Chart Script -->
+  <script>
+    const chartData = {{ chart_data | tojson | safe if chart_data else '{}' }};
+    const ctx = document.getElementById("pieChart").getContext("2d");
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: Object.keys(chartData),
+        datasets: [{
+          data: Object.values(chartData),
+          backgroundColor: ["#ff7675", "#74b9ff", "#ffeaa7", "#55efc4", "#a29bfe"]
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
