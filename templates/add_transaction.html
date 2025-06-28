@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add 💸 Transaction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #81ecec, #a29bfe);
+      margin: 0;  
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #2d3436;
+    }
+
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    .form-container {
+      max-width: 450px;
+      margin: 60px auto;
+      padding: 40px 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+    }
+
+    .form-container h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .form-container p {
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #ecf0f1;
+    }
+
+    .form-container input,
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .form-container input {
+      background: rgba(255, 255, 255, 0.25);
+      color: #0e0707;
+      backdrop-filter: blur(8px);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .form-container input::placeholder {
+  color: #242323cc; /* brighter white with 80% opacity */
+  text-shadow: 0 1px 1px rgba(0,0,0,0.4); /* gives it a soft shadow */
+  }
+
+
+    .form-container button {
+      background-color: #fab1a0;
+      color: #2d3436;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(250, 177, 160, 0.3);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .form-container button:hover {
+      background-color: #ff7675;
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body class="genz-theme">
+
+  <div class="navbar">
+    <h1>➕ Add Transaction</h1>
+    <div>
+      <a href="/dashboard" class="btn">📊 Dashboard</a>
+      <a href="/logout" class="btn">🚪 Logout</a>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <h2>💵 Add a New Expense</h2>
+    <p>Track it before you slack it 💅</p>
+    <form method="POST">
+      <input type="number" step="0.01" name="amount" placeholder="💸 Amount Spent" required>
+      <input type="text" name="category" placeholder="📁 Category (e.g. Food, Bills)" required>
+      <input type="date" name="date" required>
+      <input type="text" name="description" placeholder="📝 What's this for? (optional)">
+      <button type="submit">Add it 💰</button>
+    </form>
+  </div>
+
+</body>
+</html>
